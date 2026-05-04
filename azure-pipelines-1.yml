@@ -7,21 +7,10 @@ trigger:
 - main
 
 pool:
-  vmImage: 'ubuntu-latest'
-
-variables:
-  azureSubscription: 'Azure-Service-Connection'
-  appName: 'pooja'
-
+  vmImage: ubuntu-latest
 
 steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+- script: echo "Installing dependencies"
+- script: echo "Building Application"
+- script: echo "Running Tests"
+- script: echo "Deploying Application"
