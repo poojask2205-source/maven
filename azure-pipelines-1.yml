@@ -7,15 +7,28 @@ trigger:
 -main
 
 pool:
-  vmImage: 'ubuntu-latest'
+ vmImage: 'ubuntu-latest'
 
 variables:
   azureSubscription: 'Azure-Service-Connection'
   appName: 'mywebappdemo'
 
-
 steps:
-- script: echo "Installing dependencies"
-- script: echo "Building Application"
-- script: echo "Running Tests"
-- script: echo "Deploying Application"
+
+- task: AzureKeyVault@2
+  inputs:
+    azureSubscription: $(azureSubscription)
+    KeyVaultName: 'MyKeyVault'
+    SecretsFilter: '*'
+    RunAsPreJob: true
+
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'package'
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: $(azureSubscription)
+    appName: $(appName)
+    package: '$(System.DefaultWorkingDirectory)/**/*.jar'
