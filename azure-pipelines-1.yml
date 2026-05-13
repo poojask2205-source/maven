@@ -11,7 +11,7 @@ pool:
 
 variables:
   azureSubscription: 'poojask2205-source'
-  appName: 'mywebappdemo'
+  appName: 'lab11'
 
 steps:
 
