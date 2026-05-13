@@ -10,7 +10,7 @@ pool:
  vmImage: 'ubuntu-latest'
 
 variables:
-  azureSubscription: 'Azure-Service-Connection'
+  azureSubscription: 'poojask2205-source'
   appName: 'mywebappdemo'
 
 steps:
